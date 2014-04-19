@@ -29,7 +29,7 @@ public class ServidorMensagem {
     public static final String SENDER_ID = "AIzaSyDPgNz0vo4KcuXwPFlC99ali3sveQxKxq4";
 
     public static HttpEntity enviarMensagem(String idDispositivo, String mensagem) throws Exception {
-        // Creating an instance of HttpClient.  
+        // Criando uma instancia de HttpClient.  
         HttpEntity entity;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {

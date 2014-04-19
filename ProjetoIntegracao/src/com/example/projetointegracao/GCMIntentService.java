@@ -32,7 +32,7 @@ public class GCMIntentService extends IntentService{
         
         String messageType = gcm.getMessageType(intent);
 		
-        if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
+        if (!extras.isEmpty()) {
             
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
                 sendNotification("Erro no envio: " + extras.toString());

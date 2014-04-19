@@ -16,16 +16,15 @@ public class DisplayMessageActivity extends ActionBarActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 
-	    // Get the message from the intent
+	    // pega a mensagem do intent
 	    Intent intent = getIntent();
 	    String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-	    // Create the text view
+	    // cria o text view
 	    TextView textView = new TextView(this);
 	    textView.setTextSize(40);
 	    textView.setText(message);
 
-	    // Set the text view as the activity layout
 	    setContentView(textView);
 	}
 
@@ -41,9 +40,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() { }
