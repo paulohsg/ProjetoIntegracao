@@ -2,6 +2,7 @@ package com.example.projetointegracao;
 
 /*
  * To change this template, choose Tools | Templates
+
  * and open the template in the editor.
  */
 
@@ -24,6 +25,8 @@ import org.apache.http.protocol.HTTP;
  * @author Paulo Henrique
  */
 public class ServidorMensagem {
+	
+	//Classe responsável por enviar as mensagens para aplicação cliente.
 
     public static final String URL_GCM = "https://android.googleapis.com/gcm/send";
     public static final String SENDER_ID = "AIzaSyDPgNz0vo4KcuXwPFlC99ali3sveQxKxq4";
@@ -45,11 +48,7 @@ public class ServidorMensagem {
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();
             nvps.add(new BasicNameValuePair("registration_id", idDispositivo));
             nvps.add(new BasicNameValuePair("data.price", mensagem));
-
-            /**
-             * UrlEncodedFormEntity encodes form parameters and produce an
-             * output like param1=value1&param2=value2
-             */
+            
             httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
             // Executando a requisisção.
