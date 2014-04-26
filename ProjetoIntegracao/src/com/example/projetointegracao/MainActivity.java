@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
-	
+	/*
 	public void sendMessage(View view) {
 	    Intent intent = new Intent(this, DisplayMessageActivity.class);
 	    EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 	    intent.putExtra(EXTRA_MESSAGE, message);
 	    startActivity(intent);
 	}
+	*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
