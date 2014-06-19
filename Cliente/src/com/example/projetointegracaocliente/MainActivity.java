@@ -1,91 +1,84 @@
 package com.example.projetointegracaocliente;
 
-import static android.support.v4.app.FragmentActivity.TAG;
+
+import java.io.IOException;
+
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-public class MainActivity extends ActionBarActivity {
 
-	
-	public static final String EXTRA_MESSAGE = "message";
-    public static final String PROPERTY_REG_ID = "registration_id";
-    private static final String PROPERTY_APP_VERSION = "appVersion";
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+public class MainActivity extends Activity implements OnClickListener {
+
+    Button btnRegId;
+    EditText etRegId;
+	GoogleCloudMessaging gcm;
+    String regid;
+    String PROJECT_NUMBER = "746746007528";
+    public static final String TAG = "Cliente GCM";
     
-    static final String TAG = "GCM Demo";
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Log.i(TAG, "This device is not supported.");
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
-	
-	@Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-	
-	private static int getAppVersion(Context context) {
-        try {
-            PackageInfo packageInfo = context.getPackageManager()
-                    .getPackageInfo(context.getPackageName(), 0);
-            return packageInfo.versionCode;
-        } catch (NameNotFoundException e) {
-            
-            throw new RuntimeException("Could not get package name: " + e);
-        }
-    }
-	
-	private SharedPreferences getGcmPreferences(Context context) {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         
-        return getSharedPreferences(MainActivity.class.getSimpleName(),
-                Context.MODE_PRIVATE);
+        btnRegId = (Button) findViewById(R.id.buttonRegId);
+        etRegId = (EditText) findViewById(R.id.etRegId);
+
+        btnRegId.setOnClickListener(this);
     }
+    public void getRegId(){
+    	new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+                    if (gcm == null) {
+                        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                    }
+                    regid = gcm.register(PROJECT_NUMBER);
+                    msg = "Registration ID: " + regid;
+                    Log.i("GCM",  msg);
 
+                   
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                    
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+                etRegId.setText(msg + "\n");
+            }
+        }.execute(null, null, null);
+    }
+	@Override
+	public void onClick(View v) {
+		getRegId();
+	}
+    
 	
-
+	
+	
+	
 }

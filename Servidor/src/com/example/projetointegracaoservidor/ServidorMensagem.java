@@ -20,9 +20,23 @@ public class ServidorMensagem {
 		//Classe responsável por enviar as mensagens para aplicação cliente.
 
 	    public static final String URL_GCM = "https://android.googleapis.com/gcm/send";
-	    public static final String SENDER_ID = "AIzaSyDPgNz0vo4KcuXwPFlC99ali3sveQxKxq4";
+	    public static final String SENDER_ID = "AIzaSyBuTRXZEmZT9GVDczwCmZJEHqn8KjYCXtg";
+	    
+	    
+	    public static void enviarMensagemMultiplosIds(ArrayList<String> ids, String mensagem){
+	    	
+	    	for(String id : ids){
+	    		try {
+					enviarMensagemUnicoId(id, mensagem);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+	    	}
+	    	
+	    }
+	    
 
-	    public static HttpEntity enviarMensagem(String idDispositivo, String mensagem) throws Exception {
+	    public static HttpEntity enviarMensagemUnicoId(String regId, String mensagem) throws Exception {
 	        // Criando uma instancia de HttpClient.  
 	        HttpEntity entity;
 	        CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -37,8 +51,8 @@ public class ServidorMensagem {
 	            //Adicionando os parametros em uma lista do tipo NameValuePair.
 
 	            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-	            nvps.add(new BasicNameValuePair("registration_id", idDispositivo));
-	            nvps.add(new BasicNameValuePair("data.price", mensagem));
+	            nvps.add(new BasicNameValuePair("registration_id", regId));
+	            nvps.add(new BasicNameValuePair("data.mensagem", mensagem));
 	            
 	            httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
