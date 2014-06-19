@@ -14,7 +14,7 @@ public class ServidorTeste extends TestCase{
 	
 	@Test
 	public void testAddRegId(){
-		String regId = "APA91bFqSsbEu4QLVokTvKnZ6cEkOq2Q0UZHwCkKbfX8jW8cZ_Z9Vlc-9Mjpd77gdvMIvSxSDWkEm8aRwAtRX3Em_k0BVQUBqbe3uKoMj13LwuNmI2IoSs0YEOCWcMFrRbAiZ_beym5JZrSgMMYncsmFHd6tZDnUd1Kdpei81l2SA1Oc9c6rDAY";
+		String regId = "APA91bE3rirnfZ3ftST_ufykhLfxp4swqU4K89Pxt-30HT7_P44Sajs4Gg4EC6mW2aZslqqLXODEAPRK3L1MWCEWgecc6KUqqNxZwLEEkAXUfB3TVU9c3Xybk1d4pTJbnC6URSltM1__jvaic4hgn2INUQCxPVOYu8jgMLhcM5UUwPu15TdxlBA";
 		boolean retornado = RegId.addId(regId);
 		boolean esperado = true;
 		
@@ -27,7 +27,7 @@ public class ServidorTeste extends TestCase{
 	@Test
 	public void testEnviarMensagemUnicoId() {
 		
-		String regId = "APA91bFqSsbEu4QLVokTvKnZ6cEkOq2Q0UZHwCkKbfX8jW8cZ_Z9Vlc-9Mjpd77gdvMIvSxSDWkEm8aRwAtRX3Em_k0BVQUBqbe3uKoMj13LwuNmI2IoSs0YEOCWcMFrRbAiZ_beym5JZrSgMMYncsmFHd6tZDnUd1Kdpei81l2SA1Oc9c6rDAY";
+		String regId = "APA91bE3rirnfZ3ftST_ufykhLfxp4swqU4K89Pxt-30HT7_P44Sajs4Gg4EC6mW2aZslqqLXODEAPRK3L1MWCEWgecc6KUqqNxZwLEEkAXUfB3TVU9c3Xybk1d4pTJbnC6URSltM1__jvaic4hgn2INUQCxPVOYu8jgMLhcM5UUwPu15TdxlBA";
 		try {
 			ServidorMensagem.enviarMensagemUnicoId(regId, "Notificação Teste1");
 		} catch (Exception e) {
